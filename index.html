@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khảo Sát</title>
+</head>
+<body>
+    <h1>Chào mừng bạn đến với trang khảo sát!</h1>
+    <form id="surveyForm">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="age">Tuổi:</label>
+        <input type="number" id="age" required><br><br>
+
+        <label for="address">Địa chỉ:</label>
+        <input type="text" id="address" required><br><br>
+
+        <button type="submit">Gửi</button>
+    </form>
+
+    <script>
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var url = "https://script.google.com/macros/s/AKfycbxU4kXo-ePeZZWqZCrD8dnUgjBQTel9R2QUxPaAXr8-_P2IEBxuoX-eWOWszqcNUim0/exec";  // Dán URL Google Apps Script ở đây
+            var data = {
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                address: document.getElementById("address").value
+            };
+
+            fetch(url, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(() => {
+                alert("Gửi thành công!");
+            }).catch(error => console.error("Lỗi:", error));
+        });
+    </script>
+</body>
+</html>
